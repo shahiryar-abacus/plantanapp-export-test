@@ -1,0 +1,157 @@
+{
+  "InputFields": [
+    {
+      "Id": 29,
+      "Name": "RequestId",
+      "DefaultValue": "",
+      "Type": "Input",
+      "InputType": "Text",
+      "EntityVersionId": null,
+      "WorkflowId": 24,
+      "ContractFieldId": null,
+      "IsDeleted": false,
+      "Required": false,
+      "Description": null,
+      "OrderIndex": 0
+    }
+  ],
+  "OutputFields": [],
+  "Id": 24,
+  "GlobalId": "d0fb5b47-b26d-47e4-9c20-c21c2cf44153",
+  "ContractId": null,
+  "ConfigGenerationGlobalId": "d0fb5b47-b26d-47e4-9c20-c21c2cf44153",
+  "EnvironmentId": 1,
+  "Name": "Export Probe Workflow",
+  "Description": "Throwaway workflow to see how workflows are serialized",
+  "IsDebug": false,
+  "IsSystem": false,
+  "ActionList": {
+    "Id": 1023,
+    "GlobalId": "19cb82e2-0bd8-40f1-9ef9-9f25c3a8b43b",
+    "Actions": [
+      {
+        "Id": 726,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Read All Export Probes",
+        "ActionErrorMessage": null,
+        "ActionStackId": 1023,
+        "ActionType": "PlantAnApp.ReadAllEntity.f455072e-c9d6-4daa-be2e-4e86c1ee07e6",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 0,
+        "DiagramUID": "Activity_0rz6ymb",
+        "ActionParameters": [
+          {
+            "Id": 3412,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 726,
+            "Name": "ConnectionString",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 3413,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 726,
+            "Name": "Where",
+            "Value": "IsActive = 1",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 3414,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 726,
+            "Name": "RowLimit",
+            "Value": "1000",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 3415,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 726,
+            "Name": "OrderByClauses",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 3416,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 726,
+            "Name": "OnError",
+            "Value": {
+              "Id": 1024,
+              "GlobalId": "97adba16-3e6f-4c64-b286-8f604f4a6e3d",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 1024,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 3417,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 726,
+            "Name": "Cache",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 3418,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 726,
+            "Name": "OutputToken",
+            "Value": "ActiveProbes",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      }
+    ],
+    "IsInvalid": false
+  },
+  "ActionStackId": 0,
+  "CreatedBy": 2,
+  "CreatedOn": "2026-10-22T13:02:12.2419825+00:00",
+  "LastModifiedBy": 2,
+  "LastModifiedOn": "2026-10-22T13:02:12.2419825+00:00",
+  "DiagramXML": null,
+  "IsCorrupted": false,
+  "NamespaceUid": "8098259e-211f-491a-b2c3-4f12861210ad"
+}

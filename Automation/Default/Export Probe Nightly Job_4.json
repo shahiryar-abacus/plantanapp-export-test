@@ -1,0 +1,40 @@
+{
+  "ApiId": "6745e8be32ff4cb201f2f7",
+  "ContextPortal": 0,
+  "IsDebug": false,
+  "IsEnabled": true,
+  "Name": "Export Probe Nightly Job",
+  "Triggers": [
+    {
+      "IsEnabled": true,
+      "TriggerDefId": "Daily",
+      "Parameters": {
+        "Time": "12:00 AM",
+        "SkipIfRunning": "",
+        "OnMissfire": {
+          "Value": null,
+          "IsExpression": false,
+          "Expression": null
+        },
+        "DaysOfWeek": {
+          "MON": true,
+          "TUE": false,
+          "WED": false,
+          "THU": false,
+          "FRI": true,
+          "SAT": false,
+          "SUN": false
+        }
+      }
+    }
+  ],
+  "ActionStack": [
+    {
+      "ActionType": "LogEvent",
+      "OrderIndex": 0,
+      "IsDisabled": false,
+      "Parameters": {}
+    }
+  ],
+  "OnErrorActionStack": []
+}

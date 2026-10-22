@@ -1,0 +1,23 @@
+{
+  "globalId": "4f470212-fc19-4909-8a88-1465966697db",
+  "namespace": {
+    "globalId": "69d6e754-f892-4cad-9e6e-7d22c49871f3",
+    "name": "Probe",
+    "description": "Export probe token namespace",
+    "isSystem": false
+  },
+  "name": "ApprovalBanner",
+  "description": "",
+  "defaultValue": "Pending",
+  "cacheTimeSec": 0,
+  "cacheLayer": "global",
+  "replaceTokens": false,
+  "decodeHtml": false,
+  "stripHtmlTags": false,
+  "src": {
+    "type": "string",
+    "text": "Awaiting approval",
+    "evaluateTokens": false,
+    "params": []
+  }
+}

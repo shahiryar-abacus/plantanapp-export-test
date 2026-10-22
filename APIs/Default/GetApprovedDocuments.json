@@ -5,7 +5,40 @@
   "IsEnabled": false,
   "OrderIndex": 0,
   "CrossDomainPolicy": "Public",
-  "Input": [],
-  "OnActions": [],
+  "Input": [
+    {
+      "Name": "StatusFilter",
+      "IsDeleted": false,
+      "IsEnabled": true,
+      "OrderIndex": 0,
+      "Description": "Status to filter by",
+      "Parameters": {},
+      "InputTypeStr": "text",
+      "Validations": [
+        {
+          "Data": "{\"Message\":\"{FieldName} is required\"}",
+          "Type": "default-required",
+          "IsDeleted": false,
+          "IsEnabled": false,
+          "OrderIndex": 0,
+          "Metadata": {}
+        }
+      ]
+    }
+  ],
+  "OnActions": [
+    {
+      "ActionType": "PlantAnApp.ReadAllEntity.2ee88165-ba4f-4cfb-8bc9-483b4a1021bd",
+      "IsDisabled": false,
+      "Parameters": {},
+      "Metadata": {}
+    },
+    {
+      "ActionType": "JsonEntityList",
+      "IsDisabled": false,
+      "Parameters": {},
+      "Metadata": {}
+    }
+  ],
   "OnErrorActions": []
 }
