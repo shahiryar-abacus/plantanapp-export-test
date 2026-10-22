@@ -475,7 +475,13 @@
       "ContentPath": "Entities/Default/Approval Request.json"
     }
   ],
-  "ApiMethods": [],
+  "ApiMethods": [
+    {
+      "GlobalId": "607eb193-3c98-4220-9059-e9c5d29c773c",
+      "NamespaceGlobalId": "f2d44447-c53a-41ea-ab71-0c8786130049",
+      "ContentPath": "APIs/Default/GetApprovedDocuments.json"
+    }
+  ],
   "Roles": [
     {
       "Name": "Approver",

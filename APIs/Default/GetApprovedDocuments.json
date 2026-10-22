@@ -1,0 +1,11 @@
+{
+  "Name": "GetApprovedDocuments",
+  "Description": "Throwaway export test. Disabled.",
+  "HttpMethod": "POST",
+  "IsEnabled": false,
+  "OrderIndex": 0,
+  "CrossDomainPolicy": "Public",
+  "Input": [],
+  "OnActions": [],
+  "OnErrorActions": []
+}
