@@ -1,0 +1,521 @@
+{
+  "InputFields": [],
+  "OutputFields": [
+    {
+      "Id": 14,
+      "Name": "AlertsJson",
+      "DefaultValue": "[AlertsJson=[]]",
+      "Type": "Output",
+      "InputType": "Text",
+      "EntityVersionId": null,
+      "WorkflowId": 12,
+      "ContractFieldId": null,
+      "IsDeleted": false,
+      "Required": false,
+      "Description": null,
+      "OrderIndex": 0
+    }
+  ],
+  "Id": 12,
+  "GlobalId": "998eec15-a83b-462d-9d55-d803b878482d",
+  "ContractId": null,
+  "ConfigGenerationGlobalId": "998eec15-a83b-462d-9d55-d803b878482d",
+  "EnvironmentId": 1,
+  "Name": "PaaSysHealthCheck - FireTriggers Queue Size",
+  "Description": "System Workflow - HealthCheck FireTriggers Queue Size",
+  "IsDebug": false,
+  "IsSystem": true,
+  "ActionList": {
+    "Id": 815,
+    "GlobalId": "8a49765a-49e6-4b18-bf0f-1bafcc7cf883",
+    "Actions": [
+      {
+        "Id": 561,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Notes",
+        "ActionErrorMessage": null,
+        "ActionStackId": 815,
+        "ActionType": "Notes",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 0,
+        "DiagramUID": "Activity_0oomau6",
+        "ActionParameters": [
+          {
+            "Id": 2578,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 561,
+            "Name": "Notes",
+            "Value": "<p>Monitors the <strong>dbo.DnnSharp_SharpScheduler_FireTriggers</strong> table for excessive numbers of pending database trigger events.</p>\n<p>Each pending event is associated with a specific automation trigger. Under normal conditions, these events are processed quickly and the queue remains small. A growing queue indicates that database trigger events are being generated faster than they can be processed.</p>\n<p>The workflow groups pending events by trigger and generates one alert for each trigger with more than <strong>99</strong> pending events. Alert severity is determined by the number of queued events:</p>\n<ul>\n<li><strong>Warning:</strong> 100&ndash;999 pending events</li>\n<li><strong>Medium:</strong> 1,000&ndash;9,999 pending events</li>\n<li><strong>Critical:</strong> 10,000 or more pending events</li>\n</ul>\n<p>The alert includes the trigger identifier, trigger type, pending event count, associated job information, enabled status, and last modified date. If either the job or trigger is disabled, a hint is included indicating that queued events will not be processed until both are enabled.</p>\n<p>This alert helps identify runaway database trigger loops, high-volume database activity, or slow-running automations before the FireTriggers queue grows large enough to affect overall system performance.</p>",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 562,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Find ConfigURL",
+        "ActionErrorMessage": null,
+        "ActionStackId": 815,
+        "ActionType": "ExecuteActions",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 1,
+        "DiagramUID": "Activity_1gnkfao",
+        "ActionParameters": [
+          {
+            "Id": 2592,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 562,
+            "Name": "ActionList",
+            "Value": {
+              "Id": 816,
+              "GlobalId": "96d0b6e4-6b48-46c8-8dd8-18e23efccd02",
+              "Actions": [
+                {
+                  "Id": 563,
+                  "GlobalId": "00000000-0000-0000-0000-000000000000",
+                  "Description": "get PAATabID",
+                  "ActionErrorMessage": null,
+                  "ActionStackId": 816,
+                  "ActionType": "RunSql",
+                  "Condition": null,
+                  "IsDeleted": false,
+                  "IsDisabled": false,
+                  "OrderIndex": 0,
+                  "DiagramUID": "09c4aa1f-3922-4965-a0d4-e6271b4dd432",
+                  "ActionParameters": [
+                    {
+                      "Id": 2579,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "ConnectionString",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2580,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "QueryTimeout",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2581,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "SqlQuery",
+                      "Value": "SELECT top 1 \r\n    t.TabID,\r\n    t.TabName,\r\n    t.TabPath,\r\n    t.PortalID\r\nFROM {databaseOwner}[{objectQualifier}ModuleDefinitions] md\r\nINNER JOIN {databaseOwner}[{objectQualifier}Modules] m\r\n    ON md.ModuleDefID = m.ModuleDefID\r\nINNER JOIN {databaseOwner}[{objectQualifier}TabModules] tm\r\n    ON m.ModuleID = tm.ModuleID\r\nINNER JOIN {databaseOwner}[{objectQualifier}Tabs] t\r\n    ON tm.TabID = t.TabID\r\nWHERE md.FriendlyName = 'PlantAnAppConfiguration';",
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2582,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "OnError",
+                      "Value": {
+                        "Id": 817,
+                        "GlobalId": "252a84f4-b97e-4b02-a631-46dab38168e7",
+                        "Actions": [],
+                        "IsInvalid": false
+                      },
+                      "ActionStackId": 817,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2583,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "ShowErrors",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2584,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "DbConnector",
+                      "Value": {
+                        "Entry": "",
+                        "Group": "",
+                        "EntireGroup": false,
+                        "Type": "Database",
+                        "IsExpression": false,
+                        "Expression": ""
+                      },
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2585,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "BindTokens",
+                      "Value": [],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2586,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "OutputTokenName",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2587,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "ExtractColumns",
+                      "Value": [
+                        {
+                          "name": "TabID",
+                          "value": "PAATabID"
+                        }
+                      ],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2588,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 563,
+                      "Name": "UseTransactions",
+                      "Value": true,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    }
+                  ],
+                  "Parameters": {},
+                  "Metadata": {},
+                  "HasActionParameters": false
+                },
+                {
+                  "Id": 564,
+                  "GlobalId": "00000000-0000-0000-0000-000000000000",
+                  "Description": null,
+                  "ActionErrorMessage": null,
+                  "ActionStackId": 816,
+                  "ActionType": "ApplyTokens",
+                  "Condition": null,
+                  "IsDeleted": false,
+                  "IsDisabled": false,
+                  "OrderIndex": 1,
+                  "DiagramUID": "e155ff01-247f-4c9c-8f09-acb0b810fa02",
+                  "ActionParameters": [
+                    {
+                      "Id": 2589,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 564,
+                      "Name": "TokenizeTokenNames",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2590,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 564,
+                      "Name": "RecursionCount",
+                      "Value": "1",
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2591,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 564,
+                      "Name": "Tokens",
+                      "Value": [
+                        {
+                          "name": "ConfigURL",
+                          "value": "[NavigateURL:[PAATabID]]"
+                        }
+                      ],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    }
+                  ],
+                  "Parameters": {},
+                  "Metadata": {},
+                  "HasActionParameters": false
+                }
+              ],
+              "IsInvalid": false
+            },
+            "ActionStackId": 816,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2593,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 562,
+            "Name": "OnError",
+            "Value": {
+              "Id": 818,
+              "GlobalId": "61b20a81-3144-4a17-84e4-b16ad813d2ab",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 818,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 565,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Run SQL Query",
+        "ActionErrorMessage": null,
+        "ActionStackId": 815,
+        "ActionType": "RunSql",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 2,
+        "DiagramUID": "Activity_0wu1thn",
+        "ActionParameters": [
+          {
+            "Id": 2594,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "ConnectionString",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2595,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "QueryTimeout",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2596,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "UseTransactions",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2597,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "SqlQuery",
+            "Value": "WITH FireTriggerQueueCTE AS\r\n(\r\n    SELECT\r\n        t.Id AS resourceId,\r\n\r\n        COUNT(ft.Id) AS PendingEvents,\r\n\r\n        CASE\r\n            WHEN COUNT(ft.Id) > 10000 THEN 'Critical'\r\n            WHEN COUNT(ft.Id) > 1000  THEN 'Medium'\r\n            ELSE 'Warning'\r\n        END AS severity,\r\n\r\nJSON_QUERY\r\n(\r\n    (\r\n        SELECT\r\n            t.Id                AS TriggerId,\r\n            t.TriggerDefId      AS TriggerDefId,\r\n            COUNT(ft.Id)        AS PendingEvents,\r\n\r\n            j.Id                AS JobId,\r\n            j.Name              AS JobName,\r\n            j.IsEnabled         AS JobEnabled,\r\n\r\n            t.IsEnabled         AS TriggerEnabled,\r\n            t.LastModified      AS TriggerLastModified,\r\n\r\n            CASE\r\n                WHEN j.IsEnabled = 0 OR t.IsEnabled = 0 THEN\r\n                    'Hint: There are unprocessed events for this trigger. They will not be processed until both the job and trigger are enabled.'\r\n                ELSE ''\r\n            END AS HintMustEnable,\r\n\r\n            @ConfigURL AS ConfigURL\r\n\r\n\r\n        FOR JSON PATH, WITHOUT_ARRAY_WRAPPER\r\n    )\r\n) AS properties\r\n    FROM {databaseOwner}[{objectQualifier}DnnSharp_SharpScheduler_FireTriggers] ft\r\n    INNER JOIN {databaseOwner}[{objectQualifier}DnnSharp_SharpScheduler_Triggers] t\r\n        ON ft.TriggerId = t.Id\r\n    INNER JOIN {databaseOwner}[{objectQualifier}DnnSharp_SharpScheduler_Jobs] j\r\n        ON t.JobId = j.Id\r\n\r\n    GROUP BY\r\n        t.Id,\r\n        t.TriggerDefId,\r\n        t.IsEnabled,\r\n        t.LastModified,\r\n        j.Id,\r\n        j.Name,\r\n        j.IsEnabled\r\n\r\n    HAVING COUNT(ft.Id) > 99\r\n)\r\n\r\nSELECT\r\n(\r\n    SELECT\r\n        resourceId,\r\n        severity,\r\n        JSON_QUERY(properties) AS properties\r\n    FROM FireTriggerQueueCTE\r\n    ORDER BY PendingEvents DESC\r\n    FOR JSON PATH\r\n) AS PAASysAlerts;",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2598,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "OnError",
+            "Value": {
+              "Id": 819,
+              "GlobalId": "25f5afc2-bfd3-42cc-bc6e-c3483dadfbdf",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 819,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2599,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "ShowErrors",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2600,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "DbConnector",
+            "Value": {
+              "Entry": "",
+              "Group": "",
+              "EntireGroup": false,
+              "Type": "Database",
+              "IsExpression": false,
+              "Expression": ""
+            },
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2601,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "BindTokens",
+            "Value": [
+              {
+                "name": "ConfigURL",
+                "value": "[ConfigURL]"
+              }
+            ],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2602,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "OutputTokenName",
+            "Value": "AlertsJson",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2603,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 565,
+            "Name": "ExtractColumns",
+            "Value": [],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      }
+    ],
+    "IsInvalid": false
+  },
+  "ActionStackId": 0,
+  "CreatedBy": -1,
+  "CreatedOn": "2026-07-28T11:27:10.757402+00:00",
+  "LastModifiedBy": -1,
+  "LastModifiedOn": "2026-07-28T11:27:10.757402+00:00",
+  "DiagramXML": null,
+  "IsCorrupted": false,
+  "NamespaceUid": "7c267b0c-9d16-4d75-a1b6-11276424627e"
+}

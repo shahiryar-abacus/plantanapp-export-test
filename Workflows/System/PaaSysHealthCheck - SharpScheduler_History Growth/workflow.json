@@ -1,0 +1,521 @@
+{
+  "InputFields": [],
+  "OutputFields": [
+    {
+      "Id": 16,
+      "Name": "AlertsJson",
+      "DefaultValue": "[AlertsJson=[]]",
+      "Type": "Output",
+      "InputType": "Text",
+      "EntityVersionId": null,
+      "WorkflowId": 14,
+      "ContractFieldId": null,
+      "IsDeleted": false,
+      "Required": false,
+      "Description": null,
+      "OrderIndex": 0
+    }
+  ],
+  "Id": 14,
+  "GlobalId": "30395139-40fc-40aa-bb61-54529066820b",
+  "ContractId": null,
+  "ConfigGenerationGlobalId": "30395139-40fc-40aa-bb61-54529066820b",
+  "EnvironmentId": 1,
+  "Name": "PaaSysHealthCheck - SharpScheduler_History Growth",
+  "Description": "System Workflow - HealthCheck SharpScheduler_History Growth",
+  "IsDebug": false,
+  "IsSystem": true,
+  "ActionList": {
+    "Id": 822,
+    "GlobalId": "2dedc9de-0b52-4893-b529-92dea9b25e30",
+    "Actions": [
+      {
+        "Id": 567,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Notes",
+        "ActionErrorMessage": null,
+        "ActionStackId": 822,
+        "ActionType": "Notes",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 0,
+        "DiagramUID": "Activity_0oomau6",
+        "ActionParameters": [
+          {
+            "Id": 2614,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 567,
+            "Name": "Notes",
+            "Value": "<p>Monitors the <strong>dbo.DnnSharp_SharpScheduler_History</strong> table for excessive growth.</p>\n<p>Plant an App records the execution history of automation jobs in the <strong>dbo.DnnSharp_SharpScheduler_History</strong> table. Because history records are not removed automatically, the table will continue to grow unless a periodic cleanup process is implemented.</p>\n<p>The workflow evaluates both the total number of history records and the age of the oldest history entry. An alert is generated when either of the following thresholds is exceeded:</p>\n<ul>\n<li><strong>Warning</strong>\n<ul>\n<li>More than <strong>100,000</strong> history records, or</li>\n<li>Oldest history record is more than <strong>90 days</strong> old.</li>\n</ul>\n</li>\n<li><strong>Medium</strong>\n<ul>\n<li>More than <strong>1,000,000</strong> history records, or</li>\n<li>Oldest history record is more than <strong>365 days</strong> old.</li>\n</ul>\n</li>\n</ul>\n<p>The alert includes the current record count, the oldest and newest history dates, and the age of each in days.</p>\n<p>This alert is intended to identify systems that would benefit from implementing or increasing the frequency of automation history cleanup. While a large history table is not typically an immediate operational problem, continued growth increases database size and can gradually impact backup times, maintenance operations, and overall database performance. A common retention strategy is to keep approximately 30 days of automation history, although appropriate retention periods vary by environment and auditing requirements. An example history cleanup automation is available on Campfire.</p>",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 568,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Find ConfigURL",
+        "ActionErrorMessage": null,
+        "ActionStackId": 822,
+        "ActionType": "ExecuteActions",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 1,
+        "DiagramUID": "Activity_1gnkfao",
+        "ActionParameters": [
+          {
+            "Id": 2628,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 568,
+            "Name": "ActionList",
+            "Value": {
+              "Id": 823,
+              "GlobalId": "2dbc18b6-b5a8-4003-950c-a086f565a0c8",
+              "Actions": [
+                {
+                  "Id": 569,
+                  "GlobalId": "00000000-0000-0000-0000-000000000000",
+                  "Description": "get PAATabID",
+                  "ActionErrorMessage": null,
+                  "ActionStackId": 823,
+                  "ActionType": "RunSql",
+                  "Condition": null,
+                  "IsDeleted": false,
+                  "IsDisabled": false,
+                  "OrderIndex": 0,
+                  "DiagramUID": "09c4aa1f-3922-4965-a0d4-e6271b4dd432",
+                  "ActionParameters": [
+                    {
+                      "Id": 2615,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "ConnectionString",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2616,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "QueryTimeout",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2617,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "SqlQuery",
+                      "Value": "SELECT top 1 \r\n    t.TabID,\r\n    t.TabName,\r\n    t.TabPath,\r\n    t.PortalID\r\nFROM {databaseOwner}[{objectQualifier}ModuleDefinitions] md\r\nINNER JOIN {databaseOwner}[{objectQualifier}Modules] m\r\n    ON md.ModuleDefID = m.ModuleDefID\r\nINNER JOIN {databaseOwner}[{objectQualifier}TabModules] tm\r\n    ON m.ModuleID = tm.ModuleID\r\nINNER JOIN {databaseOwner}[{objectQualifier}Tabs] t\r\n    ON tm.TabID = t.TabID\r\nWHERE md.FriendlyName = 'PlantAnAppConfiguration';",
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2618,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "OnError",
+                      "Value": {
+                        "Id": 824,
+                        "GlobalId": "f5f3aa10-8227-4141-bf11-b1b695e67d93",
+                        "Actions": [],
+                        "IsInvalid": false
+                      },
+                      "ActionStackId": 824,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2619,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "ShowErrors",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2620,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "DbConnector",
+                      "Value": {
+                        "Entry": "",
+                        "Group": "",
+                        "EntireGroup": false,
+                        "Type": "Database",
+                        "IsExpression": false,
+                        "Expression": ""
+                      },
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2621,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "BindTokens",
+                      "Value": [],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2622,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "OutputTokenName",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2623,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "ExtractColumns",
+                      "Value": [
+                        {
+                          "name": "TabID",
+                          "value": "PAATabID"
+                        }
+                      ],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2624,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 569,
+                      "Name": "UseTransactions",
+                      "Value": true,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    }
+                  ],
+                  "Parameters": {},
+                  "Metadata": {},
+                  "HasActionParameters": false
+                },
+                {
+                  "Id": 570,
+                  "GlobalId": "00000000-0000-0000-0000-000000000000",
+                  "Description": null,
+                  "ActionErrorMessage": null,
+                  "ActionStackId": 823,
+                  "ActionType": "ApplyTokens",
+                  "Condition": null,
+                  "IsDeleted": false,
+                  "IsDisabled": false,
+                  "OrderIndex": 1,
+                  "DiagramUID": "e155ff01-247f-4c9c-8f09-acb0b810fa02",
+                  "ActionParameters": [
+                    {
+                      "Id": 2625,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 570,
+                      "Name": "TokenizeTokenNames",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2626,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 570,
+                      "Name": "RecursionCount",
+                      "Value": "1",
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2627,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 570,
+                      "Name": "Tokens",
+                      "Value": [
+                        {
+                          "name": "ConfigURL",
+                          "value": "[NavigateURL:[PAATabID]]"
+                        }
+                      ],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    }
+                  ],
+                  "Parameters": {},
+                  "Metadata": {},
+                  "HasActionParameters": false
+                }
+              ],
+              "IsInvalid": false
+            },
+            "ActionStackId": 823,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2629,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 568,
+            "Name": "OnError",
+            "Value": {
+              "Id": 825,
+              "GlobalId": "9612f3fb-bd4e-4be5-b771-b83add017401",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 825,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 571,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Run SQL Query",
+        "ActionErrorMessage": null,
+        "ActionStackId": 822,
+        "ActionType": "RunSql",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 2,
+        "DiagramUID": "Activity_0wu1thn",
+        "ActionParameters": [
+          {
+            "Id": 2630,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "ConnectionString",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2631,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "QueryTimeout",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2632,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "UseTransactions",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2633,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "SqlQuery",
+            "Value": "WITH HistoryCTE AS\r\n(\r\n    SELECT\r\n        'DnnSharp_SharpScheduler_History' AS resourceId,\r\n\r\n        COUNT(*) AS RecordCount,\r\n\r\n        MIN(DateStart) AS OldestHistoryDate,\r\n        MAX(DateStart) AS NewestHistoryDate,\r\n\r\n        DATEDIFF(day, MIN(DateStart), GETDATE()) AS OldestHistoryAgeDays,\r\n        DATEDIFF(day, MAX(DateStart), GETDATE()) AS NewestHistoryAgeDays\r\n\r\n    FROM {databaseOwner}[{objectQualifier}DnnSharp_SharpScheduler_History]\r\n)\r\n\r\nSELECT\r\n(\r\n    SELECT\r\n        resourceId,\r\n\r\n        CASE\r\n            WHEN RecordCount > 1000000\r\n              OR OldestHistoryAgeDays > 365\r\n                THEN 'Medium'\r\n\r\n            WHEN RecordCount > 100000\r\n              OR OldestHistoryAgeDays > 90\r\n                THEN 'Warning'\r\n        END AS severity,\r\n\r\n        JSON_QUERY\r\n        (\r\n            (\r\n                SELECT\r\n                    RecordCount,\r\n                    OldestHistoryDate,\r\n                    OldestHistoryAgeDays,\r\n                    NewestHistoryDate,\r\n                    NewestHistoryAgeDays,\r\n                    @ConfigURL AS ConfigURL\r\n\r\n                FOR JSON PATH, WITHOUT_ARRAY_WRAPPER\r\n            )\r\n        ) AS properties\r\n\r\n    FROM HistoryCTE\r\n    WHERE\r\n           RecordCount > 100000\r\n        OR OldestHistoryAgeDays > 90\r\n\r\n    FOR JSON PATH\r\n) AS PAASysAlerts;",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2634,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "OnError",
+            "Value": {
+              "Id": 826,
+              "GlobalId": "7fc516bb-4ea4-482f-811a-3d29b7d609ca",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 826,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2635,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "ShowErrors",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2636,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "DbConnector",
+            "Value": {
+              "Entry": "",
+              "Group": "",
+              "EntireGroup": false,
+              "Type": "Database",
+              "IsExpression": false,
+              "Expression": ""
+            },
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2637,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "BindTokens",
+            "Value": [
+              {
+                "name": "ConfigURL",
+                "value": "[ConfigURL]"
+              }
+            ],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2638,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "OutputTokenName",
+            "Value": "AlertsJson",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2639,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 571,
+            "Name": "ExtractColumns",
+            "Value": [],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      }
+    ],
+    "IsInvalid": false
+  },
+  "ActionStackId": 0,
+  "CreatedBy": -1,
+  "CreatedOn": "2026-07-28T11:27:10.757402+00:00",
+  "LastModifiedBy": -1,
+  "LastModifiedOn": "2026-07-28T11:27:10.757402+00:00",
+  "DiagramXML": null,
+  "IsCorrupted": false,
+  "NamespaceUid": "7c267b0c-9d16-4d75-a1b6-11276424627e"
+}

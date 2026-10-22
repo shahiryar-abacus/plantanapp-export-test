@@ -1,0 +1,26 @@
+{
+  "globalId": "aaf09d85-cacf-4390-8bcf-85777156b9b2",
+  "namespace": {
+    "globalId": "3a922266-bee1-4fd2-a00d-1e7f6065312c",
+    "name": "PAASysUserGuide",
+    "description": "",
+    "isSystem": true
+  },
+  "name": "GetConfigurationPath",
+  "description": "",
+  "defaultValue": "",
+  "cacheTimeSec": 0,
+  "cacheLayer": "global",
+  "replaceTokens": false,
+  "decodeHtml": false,
+  "stripHtmlTags": false,
+  "src": {
+    "type": "razor",
+    "compiledRazorLocation": "host",
+    "assemblies": "",
+    "debugScript": false,
+    "lang": "csharp",
+    "language": "csharp",
+    "params": []
+  }
+}

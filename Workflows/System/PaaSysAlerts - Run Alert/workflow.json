@@ -1,0 +1,910 @@
+{
+  "InputFields": [
+    {
+      "Id": 19,
+      "Name": "AlertTypeId",
+      "DefaultValue": "",
+      "Type": "Input",
+      "InputType": "Text",
+      "EntityVersionId": null,
+      "WorkflowId": 17,
+      "ContractFieldId": null,
+      "IsDeleted": false,
+      "Required": false,
+      "Description": null,
+      "OrderIndex": 0
+    }
+  ],
+  "OutputFields": [],
+  "Id": 17,
+  "GlobalId": "069d5d08-e3b7-43da-87ae-92214d7377e8",
+  "ContractId": null,
+  "ConfigGenerationGlobalId": "069d5d08-e3b7-43da-87ae-92214d7377e8",
+  "EnvironmentId": 1,
+  "Name": "PaaSysAlerts - Run Alert",
+  "Description": "System Workflow - Run Alert",
+  "IsDebug": false,
+  "IsSystem": true,
+  "ActionList": {
+    "Id": 831,
+    "GlobalId": "1293f273-aeb9-45d7-a7b4-aff5786f5990",
+    "Actions": [
+      {
+        "Id": 574,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Run SQL Query",
+        "ActionErrorMessage": null,
+        "ActionStackId": 831,
+        "ActionType": "RunSql",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 0,
+        "DiagramUID": "Activity_1jqryjk",
+        "ActionParameters": [
+          {
+            "Id": 2660,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "ConnectionString",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2661,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "QueryTimeout",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2662,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "UseTransactions",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2663,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "SqlQuery",
+            "Value": "SELECT *\r\nFROM paa.AlertType\r\nWHERE ID = @AlertTypeId",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2664,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "OnError",
+            "Value": {
+              "Id": 832,
+              "GlobalId": "0820aa2d-91f4-4323-8567-530441310706",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 832,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2665,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "ShowErrors",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2666,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "DbConnector",
+            "Value": {
+              "Entry": "",
+              "Group": "",
+              "EntireGroup": false,
+              "Type": "Database",
+              "IsExpression": false,
+              "Expression": ""
+            },
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2667,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "BindTokens",
+            "Value": [
+              {
+                "name": "AlertTypeId",
+                "value": "[AlertTypeId]"
+              }
+            ],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2668,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "OutputTokenName",
+            "Value": "AlertType",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2669,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 574,
+            "Name": "ExtractColumns",
+            "Value": [],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 575,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Initialize Start",
+        "ActionErrorMessage": null,
+        "ActionStackId": 831,
+        "ActionType": "ApplyTokens",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 1,
+        "DiagramUID": "Activity_0x9l3qw",
+        "ActionParameters": [
+          {
+            "Id": 2670,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 575,
+            "Name": "TokenizeTokenNames",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2671,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 575,
+            "Name": "RecursionCount",
+            "Value": "1",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2672,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 575,
+            "Name": "Tokens",
+            "Value": [
+              {
+                "name": "Start",
+                "value": "[DateTime:Now|o]"
+              }
+            ],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 576,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Execute Alert Type Workflow",
+        "ActionErrorMessage": null,
+        "ActionStackId": 831,
+        "ActionType": "ExecuteWorkflowGeneric",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 2,
+        "DiagramUID": "Activity_0d4rgvx",
+        "ActionParameters": [
+          {
+            "Id": 2673,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 576,
+            "Name": "ContractId",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2674,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 576,
+            "Name": "WorkflowGlobalId",
+            "Value": "[AlertType:Workflow]",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": true,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2675,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 576,
+            "Name": "BaseOutputTokenName",
+            "Value": "Output",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2689,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 576,
+            "Name": "OnError",
+            "Value": {
+              "Id": 833,
+              "GlobalId": "b66add5d-a4b1-4f38-b1f4-93b174356610",
+              "Actions": [
+                {
+                  "Id": 577,
+                  "GlobalId": "00000000-0000-0000-0000-000000000000",
+                  "Description": null,
+                  "ActionErrorMessage": null,
+                  "ActionStackId": 833,
+                  "ActionType": "ApplyTokens",
+                  "Condition": null,
+                  "IsDeleted": false,
+                  "IsDisabled": false,
+                  "OrderIndex": 0,
+                  "DiagramUID": "4b17057d-9af6-4caa-9750-a64c76d0b10b",
+                  "ActionParameters": [
+                    {
+                      "Id": 2676,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 577,
+                      "Name": "TokenizeTokenNames",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2677,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 577,
+                      "Name": "RecursionCount",
+                      "Value": "1",
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2678,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 577,
+                      "Name": "Tokens",
+                      "Value": [
+                        {
+                          "name": "LastError",
+                          "value": "[Exception]"
+                        }
+                      ],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    }
+                  ],
+                  "Parameters": {},
+                  "Metadata": {},
+                  "HasActionParameters": false
+                },
+                {
+                  "Id": 578,
+                  "GlobalId": "00000000-0000-0000-0000-000000000000",
+                  "Description": "Update Alert Type",
+                  "ActionErrorMessage": null,
+                  "ActionStackId": 833,
+                  "ActionType": "RunSql",
+                  "Condition": null,
+                  "IsDeleted": false,
+                  "IsDisabled": false,
+                  "OrderIndex": 1,
+                  "DiagramUID": "2846e818-1b03-4aa3-8e4e-edfa8da8b131",
+                  "ActionParameters": [
+                    {
+                      "Id": 2679,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "ConnectionString",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2680,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "QueryTimeout",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2681,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "UseTransactions",
+                      "Value": true,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2682,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "SqlQuery",
+                      "Value": "UPDATE paa.AlertType\nSET IsHealthy = 0, LastError = @LastError\nWHERE Id = @AlertTypeId",
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2683,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "OnError",
+                      "Value": {
+                        "Id": 834,
+                        "GlobalId": "bad60e96-8a1a-4fbc-8bb7-6ef58cbb285d",
+                        "Actions": [],
+                        "IsInvalid": false
+                      },
+                      "ActionStackId": 834,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2684,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "ShowErrors",
+                      "Value": true,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2685,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "DbConnector",
+                      "Value": {
+                        "Entry": "",
+                        "Group": "",
+                        "EntireGroup": false,
+                        "Type": "Database",
+                        "IsExpression": false,
+                        "Expression": ""
+                      },
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2686,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "BindTokens",
+                      "Value": [
+                        {
+                          "name": "AlertTypeId",
+                          "value": "[AlertTypeId]"
+                        },
+                        {
+                          "name": "LastError",
+                          "value": "[LastError]"
+                        }
+                      ],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2687,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "OutputTokenName",
+                      "Value": null,
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    },
+                    {
+                      "Id": 2688,
+                      "GlobalId": "00000000-0000-0000-0000-000000000000",
+                      "ActionId": 578,
+                      "Name": "ExtractColumns",
+                      "Value": [],
+                      "ActionStackId": null,
+                      "ParentParameterId": null,
+                      "IsExpression": false,
+                      "OrderIndex": 0,
+                      "LastModified": "0001-01-01T00:00:00+00:00",
+                      "LastModifiedBy": null
+                    }
+                  ],
+                  "Parameters": {},
+                  "Metadata": {},
+                  "HasActionParameters": false
+                }
+              ],
+              "IsInvalid": false
+            },
+            "ActionStackId": 833,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2690,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 576,
+            "Name": "ContinueOnError",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2691,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 576,
+            "Name": "WorkflowInputsList",
+            "Value": [],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 579,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Execute Create or Update Alerts",
+        "ActionErrorMessage": null,
+        "ActionStackId": 831,
+        "ActionType": "ExecuteWorkflowGeneric",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 3,
+        "DiagramUID": "Activity_1yjxtp5",
+        "ActionParameters": [
+          {
+            "Id": 2692,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 579,
+            "Name": "ContractId",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2693,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 579,
+            "Name": "WorkflowGlobalId",
+            "Value": "62b8f2a0-67cc-49c4-9b44-1cb18ae323a4",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": true,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2694,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 579,
+            "Name": "BaseOutputTokenName",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2695,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 579,
+            "Name": "OnError",
+            "Value": {
+              "Id": 835,
+              "GlobalId": "a0f5e03a-659a-4dea-b819-cb9ce461fd42",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 835,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2696,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 579,
+            "Name": "ContinueOnError",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2697,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 579,
+            "Name": "WorkflowInputsList",
+            "Value": [
+              {
+                "WorkflowInputName": {
+                  "IsExpression": true,
+                  "Expression": "AlertType",
+                  "Value": ""
+                },
+                "WorkflowInputValue": {
+                  "IsExpression": false,
+                  "Expression": "",
+                  "Value": "[AlertTypeId]"
+                }
+              },
+              {
+                "WorkflowInputName": {
+                  "IsExpression": true,
+                  "Expression": "AlertsJson",
+                  "Value": ""
+                },
+                "WorkflowInputValue": {
+                  "IsExpression": false,
+                  "Expression": "",
+                  "Value": "[Output:AlertsJson]"
+                }
+              }
+            ],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      },
+      {
+        "Id": 580,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Update Alert Type",
+        "ActionErrorMessage": null,
+        "ActionStackId": 831,
+        "ActionType": "RunSql",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 4,
+        "DiagramUID": "Activity_0lq2zh0",
+        "ActionParameters": [
+          {
+            "Id": 2702,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "ConnectionString",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2703,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "QueryTimeout",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2704,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "UseTransactions",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2705,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "SqlQuery",
+            "Value": "UPDATE paa.AlertType\nSET\n    IsHealthy = @IsHealthy,\n    LastModifiedBy = 1,\n    LastModifiedDate = SYSDATETIMEOFFSET(),\n    LastRun = @LastRun,\n    LastRunDurationSec = DATEDIFF(MILLISECOND, @Start, SYSDATETIMEOFFSET()) / 1000.0,\n    NextRun = @NextRun,\n    LastError = null\nWHERE Id = @AlertTypeId",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2706,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "OnError",
+            "Value": {
+              "Id": 836,
+              "GlobalId": "637b927f-86c0-4309-88dc-6636b4f7dbf2",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 836,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2707,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "ShowErrors",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2708,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "DbConnector",
+            "Value": {
+              "Entry": "",
+              "Group": "",
+              "EntireGroup": false,
+              "Type": "Database",
+              "IsExpression": false,
+              "Expression": ""
+            },
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2709,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "BindTokens",
+            "Value": [
+              {
+                "name": "LastRun",
+                "value": "[DateTime:Now|o]"
+              },
+              {
+                "name": "NextRun",
+                "value": "[DateTime:Relative(Add=\"[AlertType:CheckFrequencyMinutes] minutes\")|o]"
+              },
+              {
+                "name": "IsHealthy",
+                "value": "true"
+              },
+              {
+                "name": "AlertTypeId",
+                "value": "[AlertTypeId]"
+              },
+              {
+                "name": "Start",
+                "value": "[Start]"
+              }
+            ],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2710,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "OutputTokenName",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2711,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 580,
+            "Name": "ExtractColumns",
+            "Value": [],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      }
+    ],
+    "IsInvalid": false
+  },
+  "ActionStackId": 0,
+  "CreatedBy": -1,
+  "CreatedOn": "2026-05-05T09:16:10.757402+00:00",
+  "LastModifiedBy": -1,
+  "LastModifiedOn": "2026-05-05T09:16:10.757402+00:00",
+  "DiagramXML": null,
+  "IsCorrupted": false,
+  "NamespaceUid": "7c267b0c-9d16-4d75-a1b6-11276424627e"
+}

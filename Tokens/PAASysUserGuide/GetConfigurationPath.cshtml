@@ -1,0 +1,16 @@
+@inherits PlantAnApp.Dnn.Tokens.Razor.RazorTemplate
+@{
+ var def = DotNetNuke.Entities.Modules.Definitions.ModuleDefinitionController.GetModuleDefinitionByFriendlyName("PlantAnAppConfiguration");
+ string path = null;
+ if (def != null) {
+ foreach(var portal in PortalController.Instance.GetPortalList(string.Empty).Cast<DotNetNuke.Abstractions.Portals.IPortalInfo>().ToList()) {
+ var portalId = portal.PortalId;
+             var tab = ModuleController.Instance.GetModulesByDefinition(portalId, def.DefinitionName).Cast<ModuleInfo>().FirstOrDefault();
+        if (tab != null) {
+ path = TabController.Instance.GetTab(tab.TabID, portalId).TabPath;
+ break;
+ }
+ }
+ }
+ }
+@path

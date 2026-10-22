@@ -1,0 +1,208 @@
+{
+  "InputFields": [],
+  "OutputFields": [
+    {
+      "Id": 7,
+      "Name": "AlertsJson",
+      "DefaultValue": "[AlertsJson=[]]",
+      "Type": "Output",
+      "InputType": "Text",
+      "EntityVersionId": null,
+      "WorkflowId": 5,
+      "ContractFieldId": null,
+      "IsDeleted": false,
+      "Required": false,
+      "Description": null,
+      "OrderIndex": 0
+    }
+  ],
+  "Id": 5,
+  "GlobalId": "7d319df4-7397-47d5-b960-966c74493022",
+  "ContractId": null,
+  "ConfigGenerationGlobalId": "7d319df4-7397-47d5-b960-966c74493022",
+  "EnvironmentId": 1,
+  "Name": "PaaSysHealthCheck - Bootstrap3 NavXP",
+  "Description": "System Workflow - HealthCheck Bootstrap3 NavXP",
+  "IsDebug": false,
+  "IsSystem": true,
+  "ActionList": {
+    "Id": 798,
+    "GlobalId": "5e8f98ab-a639-4271-bf58-5f6785db7e76",
+    "Actions": [
+      {
+        "Id": 551,
+        "GlobalId": "00000000-0000-0000-0000-000000000000",
+        "Description": "Run SQL Query",
+        "ActionErrorMessage": null,
+        "ActionStackId": 798,
+        "ActionType": "RunSql",
+        "Condition": null,
+        "IsDeleted": false,
+        "IsDisabled": false,
+        "OrderIndex": 0,
+        "DiagramUID": "Activity_1ib3kx0",
+        "ActionParameters": [
+          {
+            "Id": 2493,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "ConnectionString",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2494,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "QueryTimeout",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2495,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "UseTransactions",
+            "Value": true,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2496,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "SqlQuery",
+            "Value": "WITH NavXpAlertsCTE AS\r\n(\r\n    SELECT\r\n        m.ModuleID AS resourceId,\r\n        'Medium' AS severity,\r\n        JSON_QUERY\r\n        (\r\n            (\r\n                SELECT\r\n                    t.TabID AS PageNumber,\r\n                    t.TabName AS PageName,\r\n                    tm.ModuleTitle,\r\n                    tm.PaneName,\r\n                    t.PortalID AS PortalId,\r\n                    pl.PortalName,\r\n                    m.ModuleID,\r\n                    ni.InstanceName,\r\n                    ni.Template,\r\n                    ni.IncludeBootstrap,\r\n                    LTRIM(\r\n                        CONCAT(\r\n                            CASE\r\n                                WHEN ni.IncludeBootstrap = 1\r\n                                    THEN 'The Settings / Include Bootstrap checkbox is checked'\r\n                                ELSE ''\r\n                            END,\r\n                            CASE\r\n                                WHEN ni.IncludeBootstrap = 1\r\n                                     AND ni.Template IN\r\n                                     (\r\n                                         'BootstrapTopFixed',\r\n                                         'BootstrapRightSticky',\r\n                                         'BootstrapLeftSticky',\r\n                                         'BootstrapTopSticky',\r\n                                         'PageBuilderDefault'\r\n                                     )\r\n                                    THEN '; '\r\n                                ELSE ''\r\n                            END,\r\n                            CASE\r\n                                WHEN ni.Template IN\r\n                                     (\r\n                                         'BootstrapTopFixed',\r\n                                         'BootstrapRightSticky',\r\n                                         'BootstrapLeftSticky',\r\n                                         'BootstrapTopSticky',\r\n                                         'PageBuilderDefault'\r\n                                     )\r\n                                    THEN CONCAT(\r\n                                        'The Settings / Template value, ',\r\n                                        ni.Template,\r\n                                        ', is Bootstrap3'\r\n                                    )\r\n                                ELSE ''\r\n                            END\r\n                        )\r\n                    ) AS Details,\r\n                    'true' AS paa_preventMajorUpgrades\r\n                FOR JSON PATH, WITHOUT_ARRAY_WRAPPER\r\n            )\r\n        ) AS properties,\r\n        ROW_NUMBER() OVER\r\n        (\r\n            PARTITION BY m.ModuleID\r\n            ORDER BY t.TabID\r\n        ) AS rn\r\n    FROM {databaseOwner}[{objectQualifier}DnnSharp_NavXp_Instances] ni\r\n    INNER JOIN {databaseOwner}[{objectQualifier}Modules] m\r\n        ON m.ModuleID = ni.ModuleID\r\n    INNER JOIN {databaseOwner}[{objectQualifier}TabModules] tm\r\n        ON tm.ModuleID = m.ModuleID\r\n    INNER JOIN {databaseOwner}[{objectQualifier}Tabs] t\r\n        ON t.TabID = tm.TabID\r\n    OUTER APPLY\r\n    (\r\n        SELECT TOP (1)\r\n            pl.PortalName\r\n        FROM {databaseOwner}[{objectQualifier}PortalLocalization] pl\r\n        WHERE pl.PortalID = t.PortalID\r\n        ORDER BY\r\n            CASE WHEN pl.CultureCode = 'en-US' THEN 0 ELSE 1 END,\r\n            pl.CultureCode\r\n    ) pl\r\n    WHERE\r\n        tm.IsDeleted = 0\r\n        AND\r\n        (\r\n            ni.IncludeBootstrap = 1\r\n            OR ni.Template IN\r\n            (\r\n                'BootstrapTopFixed',\r\n                'BootstrapRightSticky',\r\n                'BootstrapLeftSticky',\r\n                'BootstrapTopSticky',\r\n                'PageBuilderDefault'\r\n            )\r\n        )\r\n)\r\nSELECT\r\n(\r\n    SELECT\r\n        resourceId,\r\n        severity,\r\n        properties\r\n    FROM NavXpAlertsCTE\r\n    WHERE rn = 1\r\n    FOR JSON PATH\r\n) AS PAASysAlerts;",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2497,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "OnError",
+            "Value": {
+              "Id": 799,
+              "GlobalId": "cfcb4db2-5892-4ff8-a62d-c9d120c29065",
+              "Actions": [],
+              "IsInvalid": false
+            },
+            "ActionStackId": 799,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2498,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "ShowErrors",
+            "Value": null,
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2499,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "DbConnector",
+            "Value": {
+              "Entry": "",
+              "Group": "",
+              "EntireGroup": false,
+              "Type": "Database",
+              "IsExpression": false,
+              "Expression": ""
+            },
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2500,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "BindTokens",
+            "Value": [
+              {
+                "name": "ConfigURL",
+                "value": "[ConfigURL]"
+              }
+            ],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2501,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "OutputTokenName",
+            "Value": "AlertsJson",
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          },
+          {
+            "Id": 2502,
+            "GlobalId": "00000000-0000-0000-0000-000000000000",
+            "ActionId": 551,
+            "Name": "ExtractColumns",
+            "Value": [],
+            "ActionStackId": null,
+            "ParentParameterId": null,
+            "IsExpression": false,
+            "OrderIndex": 0,
+            "LastModified": "0001-01-01T00:00:00+00:00",
+            "LastModifiedBy": null
+          }
+        ],
+        "Parameters": {},
+        "Metadata": {},
+        "HasActionParameters": false
+      }
+    ],
+    "IsInvalid": false
+  },
+  "ActionStackId": 0,
+  "CreatedBy": -1,
+  "CreatedOn": "2026-05-06T11:45:10.757402+00:00",
+  "LastModifiedBy": -1,
+  "LastModifiedOn": "2026-05-06T11:45:10.757402+00:00",
+  "DiagramXML": null,
+  "IsCorrupted": false,
+  "NamespaceUid": "7c267b0c-9d16-4d75-a1b6-11276424627e"
+}

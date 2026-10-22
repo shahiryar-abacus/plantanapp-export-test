@@ -1,0 +1,28 @@
+{
+  "globalId": "6daf239e-1956-4df8-a1c1-0fa7d29831b7",
+  "namespace": {
+    "globalId": "96425db0-f007-45d2-80b1-eb9d7a16279d",
+    "name": "PAASysUpdates",
+    "description": "",
+    "isSystem": true
+  },
+  "name": "GetHotfixHighestState",
+  "description": "",
+  "defaultValue": "",
+  "cacheTimeSec": 0,
+  "cacheLayer": "global",
+  "replaceTokens": false,
+  "decodeHtml": false,
+  "stripHtmlTags": false,
+  "src": {
+    "type": "db",
+    "sql": "IF EXISTS (\r\n    SELECT TOP 1 PSU.[State] FROM {databaseOwner}[{objectQualifier}PlantAnApp_Updates_SpecificUpdates] AS PSU\r\n    INNER JOIN {databaseOwner}[{objectQualifier}PlantAnApp_Updates_Hotfixes] AS PH ON PH.ProductID = PSU.Product\r\n    WHERE PSU.[State] = '<span class=\"badge bg-danger\">Critical</span>' AND PSU.Product = '[TknParams:ProductID]' AND PSU.Version > PH.InstalledVersion\r\n)\r\nBEGIN\r\n\tSELECT '<span class=\"badge bg-danger\">Critical</span>'\r\nEND\r\nELSE IF EXISTS (\r\n    SELECT TOP 1 PSU.[State] FROM {databaseOwner}[{objectQualifier}PlantAnApp_Updates_SpecificUpdates] AS PSU\r\n    INNER JOIN {databaseOwner}[{objectQualifier}PlantAnApp_Updates_Hotfixes] AS PH ON PH.ProductID = PSU.Product\r\n    WHERE PSU.[State] = '<span class=\"badge bg-success\">Recommended</span>' AND PSU.Product = '[TknParams:ProductID]' AND PSU.Version > PH.InstalledVersion\r\n)\r\nBEGIN\r\n\tSELECT '<span class=\"badge bg-success\">Recommended</span>'\r\nEND\r\nELSE\r\nBEGIN\r\n\tSELECT [State] FROM {databaseOwner}[{objectQualifier}PlantAnApp_Updates_Hotfixes] WHERE Id = '[TknParams:HotfixID]'\r\nEND",
+    "col": "",
+    "cols": "",
+    "connStr": "",
+    "params": [
+      "ProductID",
+      "HotfixID"
+    ]
+  }
+}

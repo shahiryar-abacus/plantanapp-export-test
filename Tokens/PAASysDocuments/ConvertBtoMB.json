@@ -1,0 +1,25 @@
+{
+  "globalId": "3cc2b464-10f8-424f-905c-8a20bdd30685",
+  "namespace": {
+    "globalId": "242f586e-4311-4fdb-8fa6-8416d925f550",
+    "name": "PAASysDocuments",
+    "isSystem": true
+  },
+  "name": "ConvertBtoMB",
+  "description": "",
+  "defaultValue": "",
+  "cacheTimeSec": 0,
+  "cacheLayer": "global",
+  "replaceTokens": false,
+  "decodeHtml": false,
+  "stripHtmlTags": false,
+  "src": {
+    "type": "razor",
+    "compiledRazorLocation": "host",
+    "assemblies": "",
+    "debugScript": false,
+    "lang": "csharp",
+    "language": "csharp",
+    "params": []
+  }
+}
